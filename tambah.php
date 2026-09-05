@@ -27,14 +27,14 @@
         Siswa
 </div>
 
-<form method="POST" action="proses.php">
+<form method="POST" action="proses.php" enctype="multipart/form-data">
 
 <div class="card-body">
     
   <div class="mb-3 row">
   <label for="nis" class="col-sm-2 col-form-label">Nis</label>
   <div class="col-sm-10">
-    <input type="text"  class="form-control" id="nisn" name="nisn" >
+    <input required type="text"  class="form-control" id="nisn" name="nisn" >
   </div>
 </div>
 
@@ -43,7 +43,7 @@
    <div class="mb-3 row">
   <label for="nama" class="col-sm-2 col-form-label">Nama</label>
   <div class="col-sm-10">
-    <input type="text"  class="form-control" id="nama" name="nama" >
+    <input required type="text"  class="form-control" id="nama" name="nama" >
   </div>
 </div>
 
@@ -51,7 +51,7 @@
 <div class="mb-3 row">
   <label for="umur" class="col-sm-2 col-form-label">Umur</label>
   <div class="col-sm-10">
-    <input type="number" class="form-control" id="umur" name="umur">
+    <input required type="number" class="form-control" id="umur" name="umur">
   </div>
 </div>
 
@@ -59,8 +59,7 @@
 <div class="mb-3 row">
   <label for="jeniskelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
   <div class="col-sm-10">
-   <select id="jkel" name="Jenis_Kelamin" class="form-select">
-  <option selected>Jenis Kelamin</option>
+   <select required id="jkel" name="Jenis_Kelamin" class="form-select">
   <option value="laki-laki">Laki-laki</option>
   <option value="perempuan">Perempuan</option>  
 </select>
@@ -72,7 +71,7 @@
 <div class="mb-3 row">
   <label for="foto" class="col-sm-2 col-form-label">Foto Siswa</label>
   <div class="col-sm-10">
-     <input class="form-control" type="file" name="foto" id="foto">
+     <input required class="form-control" type="file" name="foto" id="foto" accept="image/*">
   </div>
 </div>
 
@@ -82,7 +81,7 @@
  <div class="mb-3 row">
   <label for="alamat" class="col-sm-2 col-form-label">Alamat Lengkap</label>
   <div class="col-sm-10">
-     <textarea class="form-control" id="alamat" name="alamat" rows="3"></textarea>
+     <textarea required class="form-control" id="alamat" name="alamat" rows="3"></textarea>
   </div>
 </div>
 
@@ -90,7 +89,7 @@
 <div class="mb-3 row">
   <label for="email" class="col-sm-2 col-form-label">Email</label>
   <div class="col-sm-10">
-    <input type="email" class="form-control" id="email" name="email">
+    <input required type="email" class="form-control" id="email" name="email">
   </div>
 </div>
 
