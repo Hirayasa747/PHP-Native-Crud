@@ -94,7 +94,7 @@ $no = 0;
 
 
       
-<a href="proses.php?hapus=<?php echo $result['id_siswa']; ?>" button" class="btn btn-danger" onClick="return confirm('Apakah anda yakin ingin menghapus data tersebut?')">
+<a href="proses.php?hapus=<?php echo $result['id_siswa']; ?>" button" class="btn btn-danger" onClick="return confirm('Apakah anda yakin ingin menghapus data tersebut???')">
         <i class="fa fa-trash" aria-hidden="true"></i>
 </a>
 

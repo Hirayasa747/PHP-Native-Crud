@@ -1,4 +1,41 @@
 <!doctype html>
+<?php
+
+include "koneksi.php";
+
+
+
+
+
+  $nisn = '';
+  $nama_siswa = '';
+  $jenis_kelamin = '';
+  $alamat = '';  
+  $umur = '';
+  $email = '';
+
+
+
+
+if (isset($_GET['ubah'])) {
+  $id_siswa = $_GET['ubah'];
+
+  $query = "SELECT * FROM tb_siswa WHERE id_siswa = '$id_siswa';";
+  $sql = mysqli_query($conn, $query);
+
+  $result = mysqli_fetch_assoc($sql);
+
+  $nisn = $result['nisn'];
+  $nama_siswa = $result['nama_siswa'];
+  $jenis_kelamin = $result['jenis_kelamin'];
+  $alamat = $result['alamat'];  
+  $umur = $result['umur'];
+  $email = $result['email'];
+  
+  }
+?>
+
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -28,13 +65,14 @@
 </div>
 
 <form method="POST" action="proses.php" enctype="multipart/form-data">
+  <input type="hidden" value="<?php echo $id_siswa; ?>" name="id_siswa">
 
 <div class="card-body">
     
   <div class="mb-3 row">
   <label for="nis" class="col-sm-2 col-form-label">Nis</label>
   <div class="col-sm-10">
-    <input required type="text"  class="form-control" id="nisn" name="nisn" >
+    <input required type="text"  class="form-control" id="nisn" name="nisn" value="<?php echo $nisn; ?>" >
   </div>
 </div>
 
@@ -43,7 +81,7 @@
    <div class="mb-3 row">
   <label for="nama" class="col-sm-2 col-form-label">Nama</label>
   <div class="col-sm-10">
-    <input required type="text"  class="form-control" id="nama" name="nama" >
+    <input required type="text"  class="form-control" id="nama" name="nama" value="<?php echo $nama_siswa; ?>" >
   </div>
 </div>
 
@@ -51,7 +89,7 @@
 <div class="mb-3 row">
   <label for="umur" class="col-sm-2 col-form-label">Umur</label>
   <div class="col-sm-10">
-    <input required type="number" class="form-control" id="umur" name="umur">
+    <input required type="number" class="form-control" id="umur" name="umur" value="<?php echo $umur; ?>">
   </div>
 </div>
 
@@ -60,8 +98,8 @@
   <label for="jeniskelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
   <div class="col-sm-10">
    <select required id="jkel" name="Jenis_Kelamin" class="form-select">
-  <option value="laki-laki">Laki-laki</option>
-  <option value="perempuan">Perempuan</option>  
+  <option <?php if($jenis_kelamin == 'Laki-laki'){echo "selected";} ?>  value="Laki-laki">Laki-laki</option>
+  <option <?php if($jenis_kelamin == 'Perempuan'){echo "selected";} ?>   value="Perempuan">Perempuan</option>  
 </select>
 
 
@@ -71,7 +109,7 @@
 <div class="mb-3 row">
   <label for="foto" class="col-sm-2 col-form-label">Foto Siswa</label>
   <div class="col-sm-10">
-     <input required class="form-control" type="file" name="foto" id="foto" accept="image/*">
+     <input <?php if(!isset($_GET['ubah'])){echo "required";} ?> class="form-control" type="file" name="foto" id="foto" accept="image/*">
   </div>
 </div>
 
@@ -81,7 +119,7 @@
  <div class="mb-3 row">
   <label for="alamat" class="col-sm-2 col-form-label">Alamat Lengkap</label>
   <div class="col-sm-10">
-     <textarea required class="form-control" id="alamat" name="alamat" rows="3"></textarea>
+     <textarea required class="form-control" id="alamat" name="alamat" rows="3"><?php echo $alamat; ?></textarea>
   </div>
 </div>
 
@@ -89,7 +127,7 @@
 <div class="mb-3 row">
   <label for="email" class="col-sm-2 col-form-label">Email</label>
   <div class="col-sm-10">
-    <input required type="email" class="form-control" id="email" name="email">
+    <input required type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>">
   </div>
 </div>
 
