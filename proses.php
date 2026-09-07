@@ -1,73 +1,36 @@
 <?php
+include "fungsi.php";
 
-include "koneksi.php";
 
 
     if(isset($_POST['aksi'])){
         if($_POST['aksi'] == "add"){
             
         
-        $nisn = $_POST['nisn'];
-        $nama_siswa = $_POST['nama']; 
-        $umur = $_POST['umur'];
-        $jenis_kelamin = $_POST['Jenis_Kelamin']; 
-        $foto = $_FILES['foto']['name'];
-        $alamat = $_POST['alamat'];
-        $email = $_POST['email'];
-
-        $dir = "img/";
-        $tmpFile = $_FILES['foto']['tmp_name'];
-
-        move_uploaded_file($tmpFile, $dir.$foto);
-
-
-
-        $query = "INSERT INTO tb_siswa VALUES (null, '$nisn', '$nama_siswa', '$jenis_kelamin', '$foto', '$alamat', '$umur','$email')";
-        $sql = mysqli_query ($conn, $query);
+      $berhasil = tambah_data($_POST, $_FILES);
         
-        if ($sql){
+
+        if ($berhasil){
             header("location: home.php");    
-        
-        //echo "data berhasil ditambahkan <a href='home.php'>[home]</a>";
 
         } else {
-            echo $query;
+            echo $berhasil;
 
         }
 
 
-        //  echo "Tambah data" . " <a href='home.php'>[Home]</a> ";
-        }elseif($_POST['aksi'] == "edit"){
-            //echo "Edit data" . " <a href='home.php'>[Home]</a> ";
-
-        $id_siswa = $_POST['id_siswa'];    
-        $nisn = $_POST['nisn'];
-        $nama_siswa = $_POST['nama']; 
-        $umur = $_POST['umur'];
-        $jenis_kelamin = $_POST['Jenis_Kelamin']; 
        
-        $alamat = $_POST['alamat'];
-        $email = $_POST['email'];
-        
+        }elseif($_POST['aksi'] == "edit"){
+            
+        $berhasil = ubah_data($_POST, $_FILES);
+       
+            if ($berhasil){
+            header("location: home.php");    
 
-        $queryShow = "SELECT * FROM tb_siswa WHERE id_siswa = '$id_siswa'";
-        $sqlShow = mysqli_query($conn, $queryShow);
-        $result = mysqli_fetch_assoc($sqlShow);
-
-        if($_FILES['foto']['name'] == ""){
-            $foto = $result['foto_siswa'];
         } else {
-            $foto = $_FILES['foto']['name'];
-            unlink("img/".$result['foto_siswa']);
-            move_uploaded_file($_FILES['foto']['tmp_name'], 'img/'.$_FILES['foto']['name']);
+            echo $berhasil;
+
         }
-
-
-
-        $query = "UPDATE tb_siswa SET nisn='$nisn', nama_siswa='$nama_siswa', jenis_kelamin='$jenis_kelamin', alamat='$alamat', umur='$umur', email='$email', foto_siswa = '$foto' WHERE id_siswa='$id_siswa';";
-
-        $sql = mysqli_query($conn, $query);
-         header("location: home.php");
         
             }
     }
@@ -75,18 +38,9 @@ include "koneksi.php";
 
 
  if(isset($_GET['hapus'])){   
- $id_siswa = $_GET['hapus'];
 
-    $queryShow = "SELECT * FROM tb_siswa WHERE id_siswa = '$id_siswa'";
-    $sqlShow = mysqli_query($conn, $queryShow);
-    $result = mysqli_fetch_assoc($sqlShow);
-
-    unlink("img/".$result['foto_siswa']);
-
- $query = "DELETE FROM tb_siswa WHERE id_siswa = '$id_siswa';";
- $sql = mysqli_query($conn, $query);
- 
-  if ($sql){
+   $berhasil = hapus_data($_GET);
+     if ($berhasil){
             header("location: home.php");    
         
 
