@@ -3,15 +3,18 @@ include "koneksi.php";
 
 function tambah_data($data, $files) {
  
-
-
-
-
 $nisn = $data ['nisn'];
         $nama_siswa = $data ['nama']; 
         $umur = $data  ['umur'];
         $jenis_kelamin = $data ['Jenis_Kelamin']; 
-         $foto = $files['foto']['name'];
+        
+        
+        $split = explode('.', $files['foto']['name']);
+        $ekstensi = $split[count($split)-1];
+    
+        
+        $foto = $nisn.'.'.$ekstensi;
+       
         $alamat = $data ['alamat'];
         $email = $data ['email'];
 
@@ -19,7 +22,6 @@ $nisn = $data ['nisn'];
         $tmpFile = $_FILES['foto']['tmp_name'];
 
         move_uploaded_file($tmpFile, $dir.$foto);
-
 
 
         $query = "INSERT INTO tb_siswa VALUES (null, '$nisn', '$nama_siswa', '$jenis_kelamin', '$foto', '$alamat', '$umur','$email')";
@@ -48,9 +50,13 @@ $nisn = $data ['nisn'];
         if($files ['foto']['name'] == ""){
             $foto = $result['foto_siswa'];
         } else {
-            $foto = $files ['foto']['name'];
+
+            $split = explode('.', $files['foto']['name']);
+            $ekstensi = $split[count($split)-1];
+
+            $foto = $result['nisn'].'.'.$ekstensi;
             unlink("img/".$result['foto_siswa']);
-            move_uploaded_file($files ['foto']['tmp_name'], 'img/'.$files ['foto']['name']);
+            move_uploaded_file($files ['foto']['tmp_name'], 'img/'.$foto);
         }
 
 
