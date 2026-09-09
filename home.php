@@ -1,5 +1,7 @@
 <?php
 include "koneksi.php";
+session_start();
+
 
 $query = "SELECT * FROM tb_siswa";
 $sql = mysqli_query($conn, $query);
@@ -40,14 +42,40 @@ $no = 0;
 <div class="container">
 
         <h1 class="mt-4">Data Siswa</h1>
+        <figure>
+         <blockquote class="blockquote">
+          <p>Berisi data yang telah disimpan ke databases.</p>
+         </blockquote>
+         <figcaption class="blockquote-footer"> 
+       CRUD <cite title="Source Title">Create Read Update Delete</cite>
+         </figcaption>
+        </figure>
 
 <div class="card-body">
    
-    <a href="tambah.php" class="btn btn-primary mb-3 mt-3">
+    <a href="tambah.php" class="btn btn-primary mb-3">
       
     <i class="fa fa-plus" aria-hidden="true"></i>
    
     Tambah Data Siswa</a>
+
+  <?php
+    if(isset($_SESSION['eksekusi'])):
+  ?>
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+  <strong>
+      <?php
+        echo $_SESSION['eksekusi'];
+      ?>
+  </strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <?php
+    session_destroy();
+    endif;
+  ?>
+
 
     <div class="table-responsive">
     <table class="table align-middle table-bordered table-hover mt-3"> 

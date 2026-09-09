@@ -1,5 +1,7 @@
 <?php
 include "fungsi.php";
+session_start();
+
 
 
 
@@ -11,6 +13,7 @@ include "fungsi.php";
         
 
         if ($berhasil){
+            $_SESSION['eksekusi'] = "Data Berhasil Ditambahkan";
             header("location: home.php");    
 
         } else {
@@ -25,6 +28,7 @@ include "fungsi.php";
         $berhasil = ubah_data($_POST, $_FILES);
        
             if ($berhasil){
+            $_SESSION['eksekusi'] = "Data Berhasil Diperbarui";    
             header("location: home.php");    
 
         } else {
@@ -41,6 +45,7 @@ include "fungsi.php";
 
    $berhasil = hapus_data($_GET);
      if ($berhasil){
+            $_SESSION['eksekusi'] = "Data Berhasil Dihapus";
             header("location: home.php");    
         
 
