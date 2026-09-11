@@ -17,10 +17,61 @@ $no = 0;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Belajar Crud</title>
+    
+    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+    
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- datatables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.3/css/dataTables.dataTables.css">
+
+
+      <style>
+        #tableData thead th {
+            position: relative;
+            padding-right: 30px !important;
+        }
+
+        #tableData thead th .dt-column-order {
+            position: absolute;
+            right: 8px;
+            left: auto;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+
+
+
   </head>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.3/js/dataTables.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#tableData').DataTable({
+            
+            pageLength: 10,
+
+            lengthMenu: [5, 10, 25, 50, 100],
+
+        
+        language: {
+                lengthMenu: "Show _MENU_ entries",
+                search: "Search:",
+                info: "Showing _START_ to _END_ of _TOTAL_ entries",
+                infoEmpty: "Showing 0 to 0 of 0 entries",
+                zeroRecords: "No matching records found"
+            }
+        });
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
 
   <body class="d-flex flex-column min-vh-100">
 <!-- Navbar -->
@@ -78,13 +129,14 @@ $no = 0;
 
 
     <div class="table-responsive">
-    <table class="table align-middle table-bordered table-hover mt-3"> 
+    
+    <table id="tableData" class="table align-middle cell-border hover"> 
       
-    <div class="mb-3 row">
+   
  
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">No</th>
       <th scope="col">Nis</th>
       <th scope="col">Nama</th>
       <th scope="col">Umur</th>
@@ -106,7 +158,7 @@ $no = 0;
       <th scope="row"><center><?php echo ++$no; ?>.</center></th>
       <td><?php echo $result['nisn']; ?></td>
       <td><?php echo $result['nama_siswa']; ?></td>
-      <td><?php echo $result['umur']; ?></td>
+      <td><center><?php echo $result['umur']; ?></center></td>
       <td><?php echo $result['jenis_kelamin']; ?></td>
       <td>
       <img src="img/<?php echo $result['foto_siswa']; ?>" alt="Foto Siswa" width="150">
@@ -146,6 +198,7 @@ $no = 0;
 </div>
 </div>
 </div>
+<div class = "mb-5"></div>
 <!-- END OF MAIN -->
 
 
